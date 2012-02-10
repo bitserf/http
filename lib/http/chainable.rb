@@ -69,7 +69,7 @@ module Http
       unless block.arity == 1
         raise ArgumentError, "block must accept only one argument" 
       end
-      EventCallback.new event, event_callbacks, &block
+      EventCallback.new event, default_headers, event_callbacks, &block
     end
 
     # Make a request with the given headers
