@@ -67,7 +67,7 @@ module Http
         raise ArgumentError, "no block specified for #{event} event"
       end
       unless block.arity == 1
-        raise ArgumentError, "block must accept only one argument" 
+        raise ArgumentError, "block must accept only one argument"
       end
       EventCallback.new event, default_headers, event_callbacks, &block
     end

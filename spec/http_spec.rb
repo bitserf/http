@@ -3,7 +3,7 @@ require 'json'
 
 describe Http do
   let(:test_endpoint) { "http://127.0.0.1:#{TEST_SERVER_PORT}/" }
-  
+
   context "getting resources" do
     it "should be easy" do
       response = Http.get test_endpoint
@@ -18,16 +18,18 @@ describe Http do
     end
 
     context "with callbacks" do
-      it "should be easy" do
+      it "fires a request callback" do
+        pending 'Http::Request is not yet implemented'
+
         request = nil
+        Http.on(:request) {|r| request = r}.get test_endpoint
+        request.should be_a Http::Request
+      end
+
+      it "fires a response callback" do
         response = nil
-
-        Http.on(:request)  {|r| request = r}
-            .on(:response)  {|r| response = r}
-            .get test_endpoint
-
-        request.should_not be_nil
-        response.should_not be_nil
+        Http.on(:response) {|r| response = r}.get test_endpoint
+        response.should be_a Http::Response
       end
     end
   end
